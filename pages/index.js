@@ -1,3 +1,11 @@
+import Link from "next/link";
+
 export default function Home() {
-  return <h1>Hello Flamingos! 🦩</h1>;
+  return (
+    <>
+      <Link href="/mealrandomizer" passHref>
+        Zum Gerichterandomizer
+      </Link>
+    </>
+  );
 }

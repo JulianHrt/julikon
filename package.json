@@ -14,10 +14,12 @@
     "prettier": "prettier --ignore-path .gitignore --write ."
   },
   "dependencies": {
+    "mongoose": "^6.8.1",
     "next": "13.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "swr": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
