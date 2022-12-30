@@ -1,10 +1,11 @@
+import styled from "styled-components";
+
 export default function AddMeal() {
   async function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log(data);
 
     const newMeal = {
       ...data,
@@ -18,7 +19,7 @@ export default function AddMeal() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       <label htmlFor="image">
         Bildupload
         <input name="image" id="image" type="text"></input>
@@ -32,6 +33,17 @@ export default function AddMeal() {
         <input name="ingredients" id="ingredients" type="text"></input>
       </label>
       <button type="submit">speichern</button>
-    </form>
+    </StyledForm>
   );
 }
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  label,
+  input {
+    display: block;
+  }
+`;

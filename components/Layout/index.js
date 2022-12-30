@@ -15,6 +15,7 @@ export default function Layout({ children }) {
 const StyledMainFlexWrapper = styled.main`
   display: flex;
   flex-direction: column;
-  margin: 1rem;
+  margin: 1rem 1rem 5rem 1rem;
   align-items: center;
+  margin-bottom: 10rem;
 `;

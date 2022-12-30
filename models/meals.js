@@ -4,6 +4,7 @@ const mealSchema = new Schema({
   image: String,
   name: String,
   ingredients: Array,
+  id: String,
 });
 
 const Meal = models.Meal || model("Meal", mealSchema);
