@@ -4,11 +4,19 @@ import Link from "next/link";
 import styled from "styled-components";
 
 export default function allMeals() {
-  const { data: meals, error } = useSWR("/api/meals", fetcher);
+  const { data: meals, error, mutate } = useSWR("/api/meals", fetcher);
 
   if (error) return <h1>...sorry cannot load meals</h1>;
 
   if (!meals) return <h1>loading</h1>;
+
+  async function deleteMeal(id) {
+    await fetch(`/api/meals/${id}`, {
+      method: "DELETE",
+    });
+
+    mutate();
+  }
 
   return (
     <ul>
@@ -17,10 +25,11 @@ export default function allMeals() {
           <StyledMealEntry>
             <h2>{meal.name}</h2>
             <Link href={`/mealrandomizer/allMeals/${meal.id}`}>edit</Link>
-            <Link href={`/mealrandomizer/allMeals/${meal.id}`}>delete</Link>
+            <button onClick={() => deleteMeal(meal.id)}>Delete</button>
           </StyledMealEntry>
         );
       })}
+      <Link href="/mealrandomizer/addMeal">+ Gericht hinzufügen</Link>
     </ul>
   );
 }

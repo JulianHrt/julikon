@@ -1,36 +1,45 @@
 import styled from "styled-components";
 
-export default function AddMeal() {
+export default function AddMeal({ defaultValue, onSubmit }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-    const newMeal = {
-      ...data,
-      ingredients: data.ingredients.split(","),
-    };
-
-    const response = await fetch("/api/meals/", {
-      method: "POST",
-      body: JSON.stringify(newMeal),
-    });
+    onSubmit(data);
   }
 
   return (
     <StyledForm onSubmit={handleSubmit}>
       <label htmlFor="image">
         Bildupload
-        <input name="image" id="image" type="text"></input>
+        <input
+          name="image"
+          id="image"
+          type="text"
+          defaultValue={defaultValue === undefined ? "" : defaultValue.image}
+        ></input>
       </label>
       <label htmlFor="name">
         Name des Gerichts:
-        <input name="name" id="name" type="text"></input>
+        <input
+          name="name"
+          id="name"
+          type="text"
+          defaultValue={defaultValue === undefined ? "" : defaultValue.name}
+        ></input>
       </label>
       <label htmlFor="ingredients">
         Zutaten:
-        <input name="ingredients" id="ingredients" type="text"></input>
+        <input
+          name="ingredients"
+          id="ingredients"
+          type="text"
+          defaultValue={
+            defaultValue === undefined ? "" : defaultValue.ingredients
+          }
+        ></input>
       </label>
       <button type="submit">speichern</button>
     </StyledForm>

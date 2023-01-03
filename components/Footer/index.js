@@ -8,10 +8,9 @@ export default function Footer() {
 
   return (
     <StyledNavbar>
-      <button onClick={() => Router.back()}>Zurück</button>
-      {path === "/mealrandomizer" ? (
+      {path.startsWith("m", 1) ? (
         <>
-          <Link href="/mealrandomizer/addMeal">+ Gericht hinzufügen</Link>
+          <Link href="/mealrandomizer">Home</Link>
           <Link href="/mealrandomizer/ingredientsSummary">
             Zusammenfassung der Zutaten
           </Link>
