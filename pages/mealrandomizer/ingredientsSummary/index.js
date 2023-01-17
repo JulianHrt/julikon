@@ -4,7 +4,7 @@ export default function IngredientsSummary({ isMeals }) {
     <ul>
       {meals.map((meal) => {
         return meal.ingredients.map((tag) => {
-          return <li>{tag}</li>;
+          return <li key={tag}>{tag}</li>;
         });
       })}
     </ul>
