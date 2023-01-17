@@ -13,10 +13,11 @@ export default function editpage() {
 
   if (!meal) return <h1>...still loading</h1>;
 
-  async function updateMeal(meal) {
+  async function updateMeal(meal, publicId) {
     const updatedMeal = {
       ...meal,
       ingredients: meal.ingredients.split(","),
+      image: publicId,
     };
 
     await fetch(`/api/meals/${id}`, {

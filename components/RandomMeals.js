@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { Image } from "cloudinary-react";
 
 export default function RandomMeals({ meals }) {
   return meals.map((meal) => {
     return (
       <MealList>
-        <Image src={meal.image} alt={`picture of ${meal.name}`}></Image>
+        <StyledImage publicId={meal.image}></StyledImage>
         <h3>{meal.name}</h3>
       </MealList>
     );
@@ -21,8 +22,8 @@ const MealList = styled.div`
   height: auto;
 `;
 
-const Image = styled.img`
+const StyledImage = styled(Image)`
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
 `;

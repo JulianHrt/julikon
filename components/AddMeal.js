@@ -1,3 +1,4 @@
+import { Image } from "cloudinary-react";
 import styled from "styled-components";
 
 export default function AddMeal({ defaultValue, onSubmit }) {
@@ -7,19 +8,28 @@ export default function AddMeal({ defaultValue, onSubmit }) {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-    onSubmit(data);
+    if (data.image.name === "") {
+      onSubmit(data);
+    } else {
+      const response = await fetch("/api/image/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const image = await response.json();
+      const publicId = image.publicId;
+
+      onSubmit(data, publicId);
+    }
   }
 
   return (
     <StyledForm onSubmit={handleSubmit}>
+      <StyledImage
+        publicId={defaultValue === undefined ? "" : defaultValue.image}
+      ></StyledImage>
       <label htmlFor="image">
         Bildupload
-        <input
-          name="image"
-          id="image"
-          type="text"
-          defaultValue={defaultValue === undefined ? "" : defaultValue.image}
-        ></input>
+        <input name="image" id="image" type="file" role="upload"></input>
       </label>
       <label htmlFor="name">
         Name des Gerichts:
@@ -55,4 +65,9 @@ const StyledForm = styled.form`
   input {
     display: block;
   }
+`;
+
+const StyledImage = styled(Image)`
+  width: 90%;
+  height: auto;
 `;

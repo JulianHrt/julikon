@@ -1,6 +1,7 @@
 import RandomMeals from "../../components/RandomMeals";
 import useSWR from "swr";
 import { fetcher } from "../../helpers/api";
+import styled from "styled-components";
 
 export default function results({ isMeals, setIsMeals }) {
   const { data: meals, error } = useSWR("/api/meals", fetcher);
@@ -27,15 +28,32 @@ export default function results({ isMeals, setIsMeals }) {
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit}>
+        <StyledForm onSubmit={handleSubmit}>
           <label htmlFor="count">
             Anzahl der Gerichte
             <input name="count" id="count" type="number"></input>
           </label>
           <button type="submit">Los gehts!</button>
-        </form>
+        </StyledForm>
         <RandomMeals meals={isMeals}></RandomMeals>
       </div>
     </>
   );
 }
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  input {
+    display: block;
+    width: 100%;
+  }
+
+  button,
+  label {
+    width: 100%;
+  }
+`;
