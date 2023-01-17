@@ -22,7 +22,7 @@ export default function allMeals() {
     <ul>
       {meals.map((meal) => {
         return (
-          <StyledMealEntry>
+          <StyledMealEntry key={meal.name}>
             <h2>{meal.name}</h2>
             <Link href={`/mealrandomizer/allMeals/${meal.id}`}>edit</Link>
             <button onClick={() => deleteMeal(meal.id)}>Delete</button>

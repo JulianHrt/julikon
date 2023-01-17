@@ -4,7 +4,7 @@ import { useLocalStorage } from "../helpers/hooks";
 import { CloudinaryContext } from "cloudinary-react";
 
 function MyApp({ Component, pageProps }) {
-  const [isMeals, setIsMeals] = useLocalStorage("meals", {});
+  const [isMeals, setIsMeals] = useLocalStorage("meals", []);
 
   return (
     <>
