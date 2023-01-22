@@ -29,7 +29,7 @@ export default function IngredientsSummary({ isMeals }) {
   }, isMeals);
 
   return (
-    <ul>
+    <StyledUL>
       {isIngredients.map((one) => {
         return one.map((eins) => {
           if (eins.bought === false) {
@@ -45,18 +45,22 @@ export default function IngredientsSummary({ isMeals }) {
           }
         });
       })}
-    </ul>
+    </StyledUL>
   );
 }
+const StyledUL = styled.ul`
+  margin-right: 2.5rem;
+`;
 
 const StyledList = styled.li`
   list-style: none;
   width: 90vw;
   margin: 1rem;
-  background-color: lightgray;
-  font-size: 2rem;
+  background-color: white;
+  font-size: 1.5rem;
   font-weight: bold;
   border-radius: 10px;
+  box-shadow: 2px 2px 5px 3px rgba(150, 138, 144, 0.2);
 `;
 
 const StyledCheckBox = styled.input`
