@@ -2,6 +2,7 @@ import RandomMeals from "../../components/RandomMeals";
 import useSWR from "swr";
 import { fetcher } from "../../helpers/api";
 import styled from "styled-components";
+import Icons from "../../components/SVG";
 
 export default function results({ isMeals, setIsMeals }) {
   const { data: meals, error } = useSWR("/api/meals", fetcher);
@@ -33,7 +34,9 @@ export default function results({ isMeals, setIsMeals }) {
             Anzahl der Gerichte
             <input name="count" id="count" type="number"></input>
           </label>
-          <button type="submit">Los gehts!</button>
+          <button type="submit">
+            <Icons variant="refresh">Los gehts!</Icons>
+          </button>
         </StyledForm>
         <RandomMeals meals={isMeals}></RandomMeals>
       </div>
@@ -46,6 +49,9 @@ const StyledForm = styled.form`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  padding: 0.5rem;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 
   input {
     display: block;
@@ -55,5 +61,11 @@ const StyledForm = styled.form`
   button,
   label {
     width: 100%;
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+    padding: 0.5rem;
   }
 `;

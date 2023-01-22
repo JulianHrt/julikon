@@ -1,5 +1,6 @@
 import { Image } from "cloudinary-react";
 import styled from "styled-components";
+import Icons from "./SVG";
 
 export default function AddMeal({ defaultValue, onSubmit }) {
   async function handleSubmit(event) {
@@ -33,29 +34,40 @@ export default function AddMeal({ defaultValue, onSubmit }) {
       </label>
       <label htmlFor="name">
         Name des Gerichts:
-        <input
+        <StyledNameInput
           name="name"
           id="name"
           type="text"
+          required
           defaultValue={defaultValue === undefined ? "" : defaultValue.name}
-        ></input>
+        ></StyledNameInput>
       </label>
       <label htmlFor="ingredients">
         Zutaten:
-        <input
+        <StyledIngredientsInput
           name="ingredients"
           id="ingredients"
           type="text"
+          required
           defaultValue={
             defaultValue === undefined ? "" : defaultValue.ingredients
           }
-        ></input>
+        ></StyledIngredientsInput>
       </label>
-      <button type="submit">speichern</button>
+      <button type="submit">
+        <Icons variant="save">speichern</Icons>
+      </button>
     </StyledForm>
   );
 }
 
+const StyledNameInput = styled.input`
+  height: 10vw;
+`;
+
+const StyledIngredientsInput = styled.input`
+  height: 20vw;
+`;
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
@@ -64,6 +76,12 @@ const StyledForm = styled.form`
   label,
   input {
     display: block;
+    width: 100%;
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
   }
 `;
 
