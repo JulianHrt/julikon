@@ -14,7 +14,7 @@ export default function Footer() {
           <StyledLink href="/mealrandomizer">
             <Icons variant="home">Home</Icons>
           </StyledLink>
-          <StyledLink href="/mealrandomizer/ingredientsSummary">
+          <StyledLink href="/mealrandomizer/likeList">
             <Icons variant="ingredients">Zutaten</Icons>
           </StyledLink>
           <StyledLink href="/mealrandomizer/allMeals">

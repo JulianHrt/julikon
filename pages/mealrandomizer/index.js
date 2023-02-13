@@ -4,7 +4,12 @@ import { fetcher } from "../../helpers/api";
 import styled from "styled-components";
 import Icons from "../../components/SVG";
 
-export default function results({ isMeals, setIsMeals }) {
+export default function results({
+  isMeals,
+  setIsMeals,
+  likedMeal,
+  setLikedMeal,
+}) {
   const { data: meals, error } = useSWR("/api/meals", fetcher);
 
   if (error) return <h1>...sorry cannot load meals</h1>;
@@ -16,15 +21,34 @@ export default function results({ isMeals, setIsMeals }) {
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    const count = data.count === "" ? 1 : data.count;
 
-    function getMultipleRandom(arr, num) {
-      const shuffled = [...arr].sort(() => 0.5 - Math.random());
+    const shuffled = [...meals].sort(() => 0.5 - Math.random());
 
-      return shuffled.slice(0, num);
+    const shuffledMeals = shuffled.slice(0, count);
+
+    setIsMeals(shuffledMeals);
+  }
+
+  function likeRecipe(variant) {
+    if (variant !== "refresh") {
+      const like = isMeals.map((meal) => {
+        return { ...meal, wanted: "yes" };
+      });
+
+      setLikedMeal((currentList) => {
+        return [...currentList, ...like];
+      });
     }
 
-    setIsMeals(() => getMultipleRandom(meals, data.count));
+    const shuffled = [...meals].sort(() => 0.5 - Math.random());
+
+    const shuffledMeals = shuffled.slice(0, 1);
+
+    setIsMeals(shuffledMeals);
   }
+
+  console.log(likedMeal);
 
   return (
     <>
@@ -38,7 +62,7 @@ export default function results({ isMeals, setIsMeals }) {
             <Icons variant="refresh">Los gehts!</Icons>
           </button>
         </StyledForm>
-        <RandomMeals meals={isMeals}></RandomMeals>
+        <RandomMeals meals={isMeals} likeRecipe={likeRecipe}></RandomMeals>
       </div>
     </>
   );
