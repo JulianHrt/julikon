@@ -5,7 +5,7 @@ import { CloudinaryContext } from "cloudinary-react";
 
 function MyApp({ Component, pageProps }) {
   const [isMeals, setIsMeals] = useLocalStorage("meals", []);
-  const [likedMeal, setLikedMeal] = useLocalStorage("likedMeals");
+  const [likedMeal, setLikedMeal] = useLocalStorage("likedMeals", []);
 
   return (
     <>
