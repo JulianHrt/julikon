@@ -7,7 +7,9 @@ export default function likeList({ likedMeal, setLikedMeal }) {
         <>
           <ul>
             {likedMeal.map((meal) => {
-              return <li key={meal.id}>{meal.name}</li>;
+              if (meal.wanted === "yes") {
+                return <li key={meal.id}>{meal.name}</li>;
+              }
             })}
           </ul>
           <button type="button" onClick={() => setLikedMeal("")}>

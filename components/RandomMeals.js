@@ -13,11 +13,11 @@ export default function RandomMeals({ meals, likeRecipe }) {
           }
         ></StyledImage>
         <StyledLikeContainer>
-          <button type="button" onClick={() => likeRecipe("refresh")}>
+          <button type="button" onClick={() => likeRecipe("dislike")}>
             Dislike
           </button>
           <StyledTitle>{meal.name}</StyledTitle>
-          <button type="button" onClick={() => likeRecipe()}>
+          <button type="button" onClick={() => likeRecipe("like")}>
             Like
           </button>
         </StyledLikeContainer>

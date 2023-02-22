@@ -31,7 +31,7 @@ export default function results({
   }
 
   function likeRecipe(variant) {
-    if (variant !== "refresh") {
+    if (variant === "like") {
       const like = isMeals.map((meal) => {
         return { ...meal, wanted: "yes" };
       });
@@ -39,16 +39,37 @@ export default function results({
       setLikedMeal((currentList) => {
         return [...currentList, ...like];
       });
+
+      const ids = likedMeal !== "" ? likedMeal.map((meal) => meal.id) : [];
+
+      const mealsWithoutLiked = meals.filter((meal) => !ids.includes(meal.id));
+
+      const shuffled = [...mealsWithoutLiked].sort(() => 0.5 - Math.random());
+
+      const shuffledMeals = shuffled.slice(0, 1);
+
+      setIsMeals(shuffledMeals);
     }
+    if (variant === "dislike") {
+      const like = isMeals.map((meal) => {
+        return { ...meal, wanted: "no" };
+      });
 
-    const shuffled = [...meals].sort(() => 0.5 - Math.random());
+      setLikedMeal((currentList) => {
+        return [...currentList, ...like];
+      });
 
-    const shuffledMeals = shuffled.slice(0, 1);
+      const ids = likedMeal !== "" ? likedMeal.map((meal) => meal.id) : [];
 
-    setIsMeals(shuffledMeals);
+      const mealsWithoutLiked = meals.filter((meal) => !ids.includes(meal.id));
+
+      const shuffled = [...mealsWithoutLiked].sort(() => 0.5 - Math.random());
+
+      const shuffledMeals = shuffled.slice(0, 1);
+
+      setIsMeals(shuffledMeals);
+    }
   }
-
-  console.log(likedMeal);
 
   return (
     <>
