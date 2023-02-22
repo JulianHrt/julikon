@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Image } from "cloudinary-react";
 
-export default function RandomMeals({ meals }) {
+export default function RandomMeals({ meals, likeRecipe }) {
   return meals.map((meal) => {
     return (
       <MealList>
@@ -12,7 +12,15 @@ export default function RandomMeals({ meals }) {
               : meal.image
           }
         ></StyledImage>
-        <StyledTitle>{meal.name}</StyledTitle>
+        <StyledLikeContainer>
+          <button type="button" onClick={() => likeRecipe("dislike")}>
+            Dislike
+          </button>
+          <StyledTitle>{meal.name}</StyledTitle>
+          <button type="button" onClick={() => likeRecipe("like")}>
+            Like
+          </button>
+        </StyledLikeContainer>
       </MealList>
     );
   });
@@ -31,6 +39,18 @@ const MealList = styled.div`
   width: 90vw;
   height: auto;
   position: relative;
+`;
+
+const StyledLikeContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+
+  button {
+    min-width: 25%;
+  }
 `;
 
 const StyledImage = styled(Image)`
