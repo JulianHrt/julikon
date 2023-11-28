@@ -13,13 +13,16 @@ export default function RandomMeals({ meals, likeRecipe }) {
           }
         ></StyledImage>
         <StyledLikeContainer>
-          <button type="button" onClick={() => likeRecipe("dislike")}>
+          <StyledButtonDisLike
+            type="button"
+            onClick={() => likeRecipe("dislike")}
+          >
             Dislike
-          </button>
+          </StyledButtonDisLike>
           <StyledTitle>{meal.name}</StyledTitle>
-          <button type="button" onClick={() => likeRecipe("like")}>
+          <StyledButtonLike type="button" onClick={() => likeRecipe("like")}>
             Like
-          </button>
+          </StyledButtonLike>
         </StyledLikeContainer>
       </MealList>
     );
@@ -28,6 +31,28 @@ export default function RandomMeals({ meals, likeRecipe }) {
 
 const StyledTitle = styled.h3`
   font-weight: bold;
+`;
+
+const StyledButtonLike = styled.button`
+  background-color: white;
+  border: 0px;
+  border-radius: 0px 0px 10px 0px;
+  color: green;
+  font-weight: bold;
+  font-size: 1rem;
+  border-bottom: 2px solid green;
+  border-right: 2px solid green;
+`;
+
+const StyledButtonDisLike = styled.button`
+  background-color: white;
+  border: 0px;
+  border-radius: 0px 10px 0px;
+  color: red;
+  font-weight: bold;
+  font-size: 1rem;
+  border-bottom: 2px solid red;
+  border-left: 2px solid red;
 `;
 
 const MealList = styled.div`
